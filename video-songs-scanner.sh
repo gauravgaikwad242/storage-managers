@@ -3,8 +3,8 @@
 # 1 pkg install bash ffmpeg bc
 # 2 bash
 
-# to remove hidden character: sed -i 's/\r$//' movie-scanner.sh
-# to test initially: bash movie-scanner.sh DRY_RUN=true
+# to remove hidden character: sed -i 's/\r$//' video-songs-scanner.sh
+# to move finally : bash video-songs-scanner.sh --move
 
 # =====================================================
 # Movie Scanner & Mover
@@ -16,21 +16,26 @@ SCAN_DIR="/storage/4394-8998"
 # Directory to exclude from scanning
 # Directories to exclude
 EXCLUDE_DIRS=(
+    "/storage/4394-8998/video songs"
+    "/storage/4394-8998/Android"
+	"/storage/emulated/0/Android/media/com.whatsapp/WhatsApp"
+	"/storage/emulated/0/Movies/Instagram"
+	"/storage/emulated/0/Android"
     "/storage/4394-8998/Movies"
     "/storage/4394-8998/Movies/Movies Todo"
 )
 
 # Directory where found movies will be moved
-DEST_DIR="/storage/4394-8998/Movies/Movies Todo"
+DEST_DIR="/storage/4394-8998/video songs"
 
 # Set to true to only print what would be moved.
 # Change to false when you're happy with the results.
 DRY_RUN=true
 
 # Movie detection parameters
-MIN_MINUTES=60
-MAX_MINUTES=240
-MIN_SIZE_MB=500
+MIN_MINUTES=2
+MAX_MINUTES=5
+MIN_SIZE_MB=2
 
 # Output log
 OUTPUT="$HOME/movies_found.txt"
@@ -38,6 +43,7 @@ OUTPUT="$HOME/movies_found.txt"
 # =====================================================
 
 # Override with first argument if provided
+
 if [ "$1" = "--move" ]; then
     DRY_RUN=false
 fi
